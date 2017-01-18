@@ -27,7 +27,7 @@ int main(int argc ,char *argv[]){
 
     if(argc != 5){
         cout << "Expects to have 3 parameters\n";
-        cout << "[Offline] USAGE is : " << program << " Doffset_low Doffset_high Soffset_low Soffset_high/n";
+        cout << "[Offline] USAGE is : " << program << " Doffset_low Doffset_high Soffset_low Soffset_high\n";
         return -1;
     } else if(argc == 5){
         int Doffset_low = 0;
@@ -57,7 +57,7 @@ int main(int argc ,char *argv[]){
 
                 TFile *outputFile = new TFile(ROOTName.c_str(),"recreate");
 
-                for(unsigned int a=0; a<80; a+=5){
+                for(unsigned int a=0; a<90; a+=5){
 
                     //definition of the scintillator inclination angle
                     double alpha = a*PI/180.;
