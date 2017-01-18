@@ -125,19 +125,21 @@ Point getRandomMuonPosition(Generator& generator, double height){
 //Compute the hit position in the scintillator planes knowing the equation of the planes
 //calculated by hand and using the origin of the muon, its direction (details on calculation
 //in the hand notebook)
-Point getHitPosition(const Point& P, const Direction& D, double alpha, int Doffset, string which){
+Point getHitPosition(const Point& P, const Direction& D, double alpha, int Doffset, int Soffset, string which){
     Point I;
 
     double scint_D = __scint_D + Doffset;
+    double scint_H = __scint_H + Soffset;
+    double scint_S = __scint_S + Soffset;
     double t = 0.;
 
-    if(which == "TOP") t=((__scint_H-P.z)*cos(alpha)-P.y*sin(alpha))
+    if(which == "TOP") t=((scint_H-P.z)*cos(alpha)-P.y*sin(alpha))
             /(sin(D.first)*sin(D.second)*sin(alpha)+cos(D.first)*cos(alpha));
-    if(which == "BOTTOM") t=((__scint_H-P.z)*cos(alpha)-P.y*sin(alpha)-scint_D)
+    if(which == "BOTTOM") t=((scint_H-P.z)*cos(alpha)-P.y*sin(alpha)-scint_D)
                           /(sin(D.first)*sin(D.second)*sin(alpha)+cos(D.first)*cos(alpha));
     if(which == "GROUND") t = -P.z/cos(D.first);
 
-    if(which == "SCREEN") t = -(__scint_S+P.y)/(sin(D.first)*sin(D.second));
+    if(which == "SCREEN") t = -(scint_S+P.y)/(sin(D.first)*sin(D.second));
 
     I.x = P.x + sin(D.first)*cos(D.second)*t;
     I.y = P.y + sin(D.first)*sin(D.second)*t;
@@ -149,8 +151,8 @@ Point getHitPosition(const Point& P, const Direction& D, double alpha, int Doffs
 //********************************************************************************************
 
 //Check if the muon is in the scintillator surfaces
-bool isInScint(const Point& P, const Direction& D, double alpha, int Doffset, string which){
-    Point I = getHitPosition(P,D,alpha,Doffset,which);
+bool isInScint(const Point& P, const Direction& D, double alpha, int Doffset, int Soffset, string which){
+    Point I = getHitPosition(P,D,alpha,Doffset,Soffset,which);
 
     double scint_D = __scint_D + Doffset;
 
