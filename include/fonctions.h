@@ -113,8 +113,8 @@ Direction getRandomDirection(Generator& generator){
 Point getRandomMuonPosition(Generator& generator, double height){
     Point muon;
 
-    muon.x = getRandomInRange(generator, -50., 50.);
-    muon.y = getRandomInRange(generator, -50., 50.);
+    muon.x = getRandomInRange(generator, -200., 200.);
+    muon.y = getRandomInRange(generator, -200., 200.);
     muon.z = height;
 
     return muon;

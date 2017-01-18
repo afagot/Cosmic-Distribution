@@ -29,7 +29,7 @@ int main(int argc ,char *argv[]){
         cout << "Expects to have 3 parameters\n";
         cout << "[Offline] USAGE is : " << program << " Doffset_low Doffset_high Soffset_low Soffset_high/n";
         return -1;
-    } else if(argc == 3){
+    } else if(argc == 5){
         int Doffset_low = 0;
         int Doffset_high = 0;
         int Soffset_low = 0;
@@ -57,7 +57,7 @@ int main(int argc ,char *argv[]){
 
                 TFile *outputFile = new TFile(ROOTName.c_str(),"recreate");
 
-                for(unsigned int a=0; a<60; a+=5){
+                for(unsigned int a=0; a<80; a+=5){
 
                     //definition of the scintillator inclination angle
                     double alpha = a*PI/180.;
@@ -83,7 +83,7 @@ int main(int argc ,char *argv[]){
                     string muondirTitle = "Triggered muon direction components";
 
                     TH2F* GroundProfil = new TH2F(grd_profilID.c_str(),grd_profilTitle.c_str(),200,-100,100,200,-100,100);
-                    TH2F* ScreenProfil = new TH2F(scr_profilID.c_str(),scr_profilTitle.c_str(),200,-100,100,200,-100,100);
+                    TH2F* ScreenProfil = new TH2F(scr_profilID.c_str(),scr_profilTitle.c_str(),200,-100,100,200,-100+s,100+s);
                     TH2F* MuonDir = new TH2F(muondirID.c_str(),muondirTitle.c_str(),90,0.,90.,40,0.,360.);
 
                     //List of root IDs and root Titles for triggered forward muons
@@ -147,7 +147,7 @@ int main(int argc ,char *argv[]){
                         //Print progress bar
                         progress = float(n/Stat);
 
-                        int barWidth = 70;
+                        int barWidth = 25;
 
                         cout << "Progress " << ROOTName << " a-" << intTostring(a);
                         cout << " [";
