@@ -29,7 +29,7 @@ using namespace std;
 const double __scint_L = 32.; //scintillator «L»ength
 const double __scint_W = 9.4; //scintillator «W»idth
 const double __muon_H  = 20.; //top scintillator plane «H»eight
-const double __scint_D = 4.;  //«D»istance in between the sintillator planes
+const double __scint_D = 10.;  //«D»istance in between the sintillator planes
 const double __scint_S = 20.; //Distance to the «S»creen (vertical distribution)
 
 //********************************************************************************************

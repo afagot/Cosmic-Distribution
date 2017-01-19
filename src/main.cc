@@ -30,8 +30,6 @@ int main(int argc ,char *argv[]){
         cout << "[Offline] USAGE is : " << program << " Hoffset_low Hoffset_high\n";
         return -1;
     } else if(argc == 3){
-        int Doffset_low = -__scint_D;
-        int Doffset_high = 0;
         int Hoffset_low = 0;
         int Hoffset_high = 0;
 
@@ -44,12 +42,12 @@ int main(int argc ,char *argv[]){
         converter.clear();
 
         for(int h=Hoffset_low; h<=Hoffset_high; h++){
-            for(int d=Doffset_low; d<=Doffset_high; d++){
+            for(int d=0; d<int(__scint_D); d++){
                 string ROOTName = "Angle-dependency_" + intTostring(h) + "_" + intTostring(d) + ".root";
 
                 TFile *outputFile = new TFile(ROOTName.c_str(),"recreate");
 
-                for(unsigned int a=0; a<80; a+=5){
+                for(unsigned int a=0; a<90; a+=5){
 
                     //definition of the scintillator inclination angle
                     double alpha = a*PI/180.;
@@ -111,7 +109,7 @@ int main(int argc ,char *argv[]){
                     //Height of the muon generation plane
                     //this plane is placed at the level of the height of the barycenter
                     //of the 2 scintillator surfaces, D being the distance in between them
-                    double scint_D = __scint_D + double(d);
+                    double scint_D = double(d);
                     double muon_H = __muon_H + double(h);
 
                     while(n<Nmuons){
